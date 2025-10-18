@@ -8,14 +8,36 @@ const Navbar = () => {
   const [showMenu,setShowMenu]=useState(false);
   const [token,setToken]= useState(true);
   return (
-    <div className="flex items-center justify-between text-sm py-2 mb-5 border- border-b-gray-400  sticky top-0 z-100">
-      <img
+    <div className="flex items-center justify-between text-sm py-2 mb-5 border- border-b-gray-400  sticky top-0 z-100 backdrop-blur-lg sticky top-0 z-50">
+      {/* <img
         className=" cursor-pointer"
         src={logo}
         alt="logo"
         height={10}
         width={130}
-      />
+      /> */}
+      <h1
+        className="
+          text-4xl md:text-5xl lg:text-6xl   
+          font-black  
+           italic                       
+          cursor-pointer
+          tracking-tighter               
+          bg-gradient-to-r
+          from-pink-500
+          via-purple-500
+          to-blue-500
+          text-transparent
+          bg-clip-text
+          transition
+          duration-300
+          ease-in-out
+          hover:scale-[1.02]
+          hover:opacity-95
+          "
+      >
+        WeCare
+      </h1>
       <ul className="hidden md:flex items-start gap-5 font-medium">
         <NavLink to="/">
           <li className="py-1">Home</li>
