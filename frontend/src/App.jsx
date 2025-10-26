@@ -14,20 +14,27 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className='mx-4 sm:mx-[10%]'>
-      <Navbar/>
+    <div className="mx-4 sm:mx-[10%]">
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/doctors" element={<Doctors />} />
-        <Route path="/doctors/:spaciality" element={<Home />} />
+        <Route path="/doctors/:spaciality" element={<Doctors />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/myappointments" element={<MyAppointments />} />
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/about" element={<About />} />
-        <Route path="/appointment/:docId" element={<Appointment/>} />
+        <Route path="/appointment/:docId" element={<Appointment />} />
+        {/* ----Addtional route */}
+        <Route path="/doctors/appointment/:docId" element={<Appointment />} />
+        <Route
+          path="/doctors/:spaciality/appointment/:docId"
+          element={<Appointment />}
+        />
+        
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );}
 
