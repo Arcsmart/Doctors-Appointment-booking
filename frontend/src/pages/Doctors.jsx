@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { useState } from "react";
 const SPECIALITIES = [
-  "General pysician",
+  "General Physician",
   "Gastroenterologist",
   "Pediatrician",
   "Dermatologist",
@@ -70,7 +70,7 @@ const Doctors = () => {
             onClick={() =>
               spaciality === "General pysician"
                 ? navigate("/doctors")
-                : navigate("/doctors/General pysician")
+                : navigate("/doctors/General physician")
             }
             className={`w-[94vw] sm:w-auto pl-3 py1.5 pt-1.6 border border-gray-300 rounded transition-all cursor-pointer ${
               spaciality === "General pysician"
@@ -78,7 +78,7 @@ const Doctors = () => {
                 : ""
             }`}
           >
-            General pysician
+            General physician
           </p>
           <p
             onClick={() =>

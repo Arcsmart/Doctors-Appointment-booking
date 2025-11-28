@@ -1,13 +1,13 @@
 import React from 'react'
-import banner from '../assets/images/appointment_img.png'
+import banner from '../assets/images/banner2.png'
 import { useNavigate } from 'react-router-dom'
 const Banner = () => {
           const navigate =useNavigate()
   return (
-    <div className="flex bg-primar bg-green-500 rounded-lg px-6 sm:px-10 md:px-14 lg:px-12 my-20 md:mx-10">
+    <div className="flex bg-primar bg-gray rounded-lg px-6 sm:px-10 md:px-14 lg:px-12 my-20 md:mx-10">
       {/* ---left side ----- */}
       <div className="flex-1 py-8 sm:py-10 md:py-16 lg:py-12 lg:pl-5">
-        <div className="text-xl sm:text-2xl md:text-3xl lg:text-5xl front-semibold text-black">
+        <div className="text-xl sm:text-2xl md:text-3xl lg:text-5xl front-semibold text-green-500">
           <p>Schedule Your Appointment </p>
           <p className="pt-4">with Over 100 Trusted Doctors</p>
         </div>
@@ -16,7 +16,7 @@ const Banner = () => {
             navigate("/login");
             scrollTo(0, 0);
           }}
-          className="bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all"
+          className="bg-blue-600 text-sm sm:text-base text-white px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all"
         >
           Create account
         </button>

@@ -9,6 +9,7 @@
 @theme {
   --color-primary: #5f6fff;
   --grid-template-columns-auto: repeat(auto-fill, minmax(200px, 1fr));
+  --color-gray: #D9DADE,
 
   
 }
