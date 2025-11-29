@@ -38,6 +38,7 @@ connectCloudinary();
 // app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions));
 const allowedOrigins = [
+  "https://wecarebook-nnpaktkps-wecareappointment.vercel.app",
   "https://wecarebook.vercel.app",
 
   "https://wecareadmin-eight.vercel.app",
