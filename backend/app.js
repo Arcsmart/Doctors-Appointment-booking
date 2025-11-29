@@ -14,9 +14,19 @@ connectDB()
 connectCloudinary()
 // middleware
 app.use(express.json())
-app.use(cors({ origin: "*", credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "https://doctorsappointment-pi.vercel.app/",
+      "https://admin-flame-seven.vercel.app/",
+    ],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
+
 // api endpoints
-app.use('/api/admin',adminRoute)
+ app.use("/api/admin", adminRoute);
 app.use('/api/doctor',doctorRouter)
 app.use("/api/user",userRoute);
 
