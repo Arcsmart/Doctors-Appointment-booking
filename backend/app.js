@@ -13,17 +13,31 @@ const port = process .env.PORT || 4000
 connectDB()
 connectCloudinary()
 // middleware
-app.use(express.json())
-app.use(
-  cors({
-    origin: [
-      "https://wecarebook.vercel.app",
-      "https://wecareadmin-eight.vercel.app",
-    ],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
+
+const corsOptions = {
+  origin: [
+    "https://wecarebook.vercel.app",
+    "https://wecareadmin-eight.vercel.app",
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+  credentials: true,
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-CSRF-Token",
+    "X-Requested-With",
+    "Accept",
+    "Accept-Version",
+    "Content-Length",
+    "Content-MD5",
+    "Date",
+    "X-Api-Version",
+  ],
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.options("*", cors(corsOptions));
 
 // api endpoints
  app.use("/api/admin", adminRoute);
