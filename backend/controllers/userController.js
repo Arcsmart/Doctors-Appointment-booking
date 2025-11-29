@@ -269,30 +269,7 @@ const paymentChapa = async (req, res) => {
     }
   } catch (error) {
   
-    console.log(" CHAPA ERROR DETAILS:");
-
-    if (error.response) {
-     
-      console.log("Data:", error.response.data);
-      console.log("Status:", error.response.status);
-
-      return res.json({
-        success: false,
-       
-        message: error.response.data.message || "Payment Error",
-      });
-    } else if (error.request) {
-     
-      console.log("No response received:", error.request);
-      return res.json({
-        success: false,
-        message: "No response from Chapa server",
-      });
-    } else {
-      
-      console.log("Error Message:", error.message);
-      return res.json({ success: false, message: error.message });
-    }
+    console.log("chapa error details",error);
   }
 };
 
@@ -347,13 +324,8 @@ const verifyChapa = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(" VERIFICATION ERROR:");
-    if (error.response) {
-      console.log(error.response.data);
-      return res.json({ success: false, message: error.response.data.message });
-    }
-    console.log(error);
-    res.json({ success: false, message: "Internal Server Error" });
+    console.log(" verfication error:",error);
+    ;
   }
 };
 

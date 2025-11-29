@@ -62,6 +62,10 @@ hover:opacity-95
           <li className="py-1">Contact</li>
           <hr className="border-none outline-none h-0.5 bg-blue-500 w-3/5 m-auto hidden" />
         </NavLink>
+        <NavLink to="http://localhost:5174/">
+          <li className="py-2 rounded-full text-sm border-gray-500">Admin pannel</li>
+          {/* <hr className="border-none outline-none h-0.5 bg-blue-500 w-3/5 m-auto hidden" /> */}
+        </NavLink>
       </ul>
 
       {/* Profile/Login and Menu Icon Section */}
