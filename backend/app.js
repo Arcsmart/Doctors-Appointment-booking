@@ -14,12 +14,12 @@ connectDB()
 connectCloudinary()
 // middleware
 app.use(express.json())
-app.use(cors())
+app.use(cors({ origin: "*", credentials: true }));
 // api endpoints
 app.use('/api/admin',adminRoute)
 app.use('/api/doctor',doctorRouter)
 app.use("/api/user",userRoute);
-//locoalhost:400/api/admin/add-doctor
+
 app.get ('/',(req,res)=>{
   res.send('Api working')        
 })
