@@ -38,7 +38,7 @@ connectCloudinary();
 // app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions));
 const allowedOrigins = [
-  "https://wecarebook-nnpaktkps-wecareappointment.vercel.app",
+  "https://wecare-j0k41g9ce-wecareappointment.vercel.app",
   "https://wecarebook.vercel.app",
 
   "https://wecareadmin-eight.vercel.app",
@@ -46,7 +46,6 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, callback) => {
-      
       if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       } else {
@@ -55,7 +54,7 @@ app.use(
         return callback(new Error(msg), false);
       }
     },
-    credentials: true, 
+    credentials: true,
   })
 );
 app.use(express.json());
