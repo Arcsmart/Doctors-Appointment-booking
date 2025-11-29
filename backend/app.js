@@ -20,23 +20,14 @@ const allowedOrigins = [
   "https://wecareadmin-eight.vercel.app",
 ];
 
-// 1. Handle Preflight requests for ALL routes
-app.options(
-  "*",
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
 
-// 2. Standard CORS middleware
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    credentials: true,
-  })
-);
+const corsConfig = {
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+  credentials: true,
+};
+app.use(cors(corsConfig));
+app.options("(.*)", cors(corsConfig));
 app.use(express.json());
 
 // api endpoints
