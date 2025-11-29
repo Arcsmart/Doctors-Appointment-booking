@@ -14,46 +14,26 @@ connectDB();
 connectCloudinary();
 // middleware
 
-// const corsOptions = {
-//   origin: [
-//     "https://wecarebook.vercel.app",
-//     "https://wecareadmin-eight.vercel.app",
-//   ],
-//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-//   credentials: true,
-//   allowedHeaders: [
-//     "Content-Type",
-//     "Authorization",
-//     "X-CSRF-Token",
-//     "X-Requested-With",
-//     "Accept",
-//     "Accept-Version",
-//     "Content-Length",
-//     "Content-MD5",
-//     "Date",
-//     "X-Api-Version",
-//   ],
-// };
-
-// app.use(cors(corsOptions));
-// app.options("*", cors(corsOptions));
 const allowedOrigins = [
-  "https://wecare-j0k41g9ce-wecareappointment.vercel.app",
   "https://wecarebook.vercel.app",
 
   "https://wecareadmin-eight.vercel.app",
 ];
+
+// 1. Handle Preflight requests for ALL routes
+app.options(
+  "*",
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
+
+// 2. Standard CORS middleware
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        const msg =
-          "The CORS policy for this site does not allow access from the specified Origin.";
-        return callback(new Error(msg), false);
-      }
-    },
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     credentials: true,
   })
 );
