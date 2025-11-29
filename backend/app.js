@@ -17,8 +17,8 @@ app.use(express.json())
 app.use(
   cors({
     origin: [
-      "https://doctorsappointment-pi.vercel.app",
-      "https://admin-flame-seven.vercel.app",
+      "https://wecarebook.vercel.app",
+      "https://wecareadmin-eight.vercel.app",
     ],
     methods: ["POST", "GET"],
     credentials: true,
