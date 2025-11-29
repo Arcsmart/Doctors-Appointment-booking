@@ -12,23 +12,32 @@ const app = express();
 const port = process.env.PORT || 4000;
 connectDB();
 connectCloudinary();
+
 // middleware
 
+pp.options("*", cors());
 const allowedOrigins = [
   "https://wecarebook.vercel.app",
 
   "https://wecareadmin-eight.vercel.app",
 ];
 
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
 
-const corsConfig = {
-  origin: allowedOrigins,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-  credentials: true,
-};
-app.use(cors(corsConfig));
+      if (allowedOrigins.indexOf(origin) === -1) {
+        return callback(new Error("CORS Policy: Origin not allowed"), false);
+      }
 
-app.options("(.*)", cors(corsConfig));
+      return callback(null, true);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization", "token"],
+  })
+);
 app.use(express.json());
 
 // api endpoints
@@ -43,3 +52,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log("Server starting", port);
 });
+
+export default app;
