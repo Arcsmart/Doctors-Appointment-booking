@@ -53,5 +53,5 @@ app.get("/", (req, res) => {
 //   console.log("Server starting", port);
 // });
 
-// export default app;
-module.exports = app;
+export default app;
+
