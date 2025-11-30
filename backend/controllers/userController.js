@@ -233,8 +233,9 @@ const paymentChapa = async (req, res) => {
       first_name: firstName,
       last_name: lastName,
       tx_ref: tx_ref,
-      callback_url: "http://localhost:4000/api/user/verify-chapa",
-      return_url: "http://localhost:5173/myappointments",
+      callback_url:
+        "https://backend-zeta-indol.vercel.app/api/user/verify-chapa",
+      return_url: "https://wecarebook.vercel.app/myappointments",
       customization: {
         title: "Medical Payment",
         description: `Appointment ID ${appointmentId}`,
