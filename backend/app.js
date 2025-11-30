@@ -14,30 +14,33 @@ connectDB();
 connectCloudinary();
 
 // middleware
-
-// pp.options("*", cors());
 const allowedOrigins = [
   "https://wecarebook.vercel.app",
-
   "https://wecareadmin-eight.vercel.app",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
+      
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.indexOf(origin) === -1) {
-        return callback(new Error("CORS Policy: Origin not allowed"), false);
-      }
+        
+        console.log("Blocked by CORS:", origin);
 
+        var msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
       return callback(null, true);
     },
+    
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization", "token"],
   })
 );
+
 app.use(express.json());
 
 // api endpoints
