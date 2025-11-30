@@ -15,7 +15,7 @@ connectCloudinary();
 
 // middleware
 
-pp.options("*", cors());
+// pp.options("*", cors());
 const allowedOrigins = [
   "https://wecarebook.vercel.app",
 
@@ -49,8 +49,8 @@ app.get("/", (req, res) => {
   res.send("Api working");
 });
 
-app.listen(port, () => {
-  console.log("Server starting", port);
-});
+// app.listen(port, () => {
+//   console.log("Server starting", port);
+// });
 
 export default app;
