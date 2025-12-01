@@ -6,7 +6,7 @@ import { v2 as cloudinary } from "cloudinary";
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
 import "dotenv/config";
-import axios from 'axios'
+import axios from "axios";
 // Api to register
 
 const registerUer = async (req, res) => {
@@ -214,7 +214,6 @@ const paymentChapa = async (req, res) => {
       });
     }
 
-   
     const tx_ref = `tx-${appointmentId}-${Date.now()}`;
 
     // name handling
@@ -224,7 +223,6 @@ const paymentChapa = async (req, res) => {
     const lastName =
       nameParts.length > 1 ? nameParts.slice(1).join(" ") : "Customer";
 
-   
     // Chapa requires 'amount' to be a string, not a number.
     const data = {
       amount: appointmentData.amount.toString(),
@@ -241,10 +239,8 @@ const paymentChapa = async (req, res) => {
         description: `Appointment ID ${appointmentId}`,
       },
     };
-   
-    
 
-    //  preper headers 
+    //  preper headers
     const config = {
       headers: {
         Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`,
@@ -252,8 +248,6 @@ const paymentChapa = async (req, res) => {
       },
     };
 
-    
-    // This bypasses the wrapper library so we can see real errors
     const response = await axios.post(process.env.CHAPA_INTIAZE, data, config);
 
     if (response.data.status === "success") {
@@ -269,15 +263,15 @@ const paymentChapa = async (req, res) => {
       });
     }
   } catch (error) {
-  
-    console.log("chapa error details",error);
+    console.log("chapa error details", error);
   }
 };
 
 // verifying chapa payment
 const verifyChapa = async (req, res) => {
   try {
-    const { tx_ref } = req.body;
+    // const { tx_ref } = req.body;
+    const tx_ref = req.body.tx_ref || req.query.tx_ref;
 
     if (!tx_ref) {
       return res.json({
@@ -301,20 +295,21 @@ const verifyChapa = async (req, res) => {
 
     //  Check if payment was successful
     if (response.data.status === "success") {
-      
       const parts = tx_ref.split("-");
-      const appointmentId = parts[1]; 
+      const appointmentId = parts[1];
 
-      
-       const appointmentData  =  await appointmentModel.findByIdAndUpdate  (appointmentId, {
-        payment: true,
-         new: true 
-      });
+      const appointmentData = await appointmentModel.findByIdAndUpdate(
+        appointmentId,
+        {
+          payment: true,
+          new: true,
+        }
+      );
 
       return res.json({
         success: true,
         message: "Payment Successfully",
-        amount: appointmentData.amount, 
+        amount: appointmentData.amount,
         name: appointmentData.userData.name,
         data: response.data.data,
       });
@@ -325,8 +320,7 @@ const verifyChapa = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(" verfication error:",error);
-    ;
+    console.log(" verfication error:", error);
   }
 };
 
