@@ -15,6 +15,6 @@ userRouter.get('/appointments',authUser,listAppointment)
 
 userRouter.post('/cancel-appointment',authUser,cancelAppointment)
 userRouter.post('/payment-chapa',authUser,paymentChapa)
-userRouter.post('/verify-chapa',authUser,verifyChapa)
+userRouter.all('/verify-chapa',authUser,verifyChapa)
 
 export default userRouter
