@@ -270,8 +270,8 @@ const paymentChapa = async (req, res) => {
 // verifying chapa payment
 const verifyChapa = async (req, res) => {
   try {
-    // const { tx_ref } = req.body;
-    const tx_ref = req.query.tx_ref;
+    const { tx_ref } = req.body;
+    // const tx_ref = req.query.tx_ref;
     // const tx_ref = req.body.tx_ref || req.query.tx_ref;
 
     if (!tx_ref) {

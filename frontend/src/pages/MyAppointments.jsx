@@ -95,7 +95,7 @@ const MyAppointments = () => {
       
       // toast.info("Verifying payment...");
 
-      const { data } = await axios.get(
+      const { data } = await axios.post(
         backendUrl + "/api/user/verify-chapa",
         { tx_ref },
         { headers: { token} }
