@@ -27,7 +27,7 @@ const SpacialityMenu = () => {
           >
             <img
               className="w-16 sm:w-24 mb-2  h-20 rounded-full object-cover "
-              src={item.imge}
+              src={item.image}
               alt=""
             />
 
