@@ -11,7 +11,7 @@ const RalatedDoctors = ({spaciality,docId}) => {
        if(doctors.length > 0 && spaciality){
         const doctorsData = doctors.filter((doc)=>doc.spaciality ===spaciality && doc._id !== docId)
         setRelDocs(doctorsData)
-        // console.log("doc dat", doctorsData);
+        
        }
        
      },[doctors,spaciality,docId])
