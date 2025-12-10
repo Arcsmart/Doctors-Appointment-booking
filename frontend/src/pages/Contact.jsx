@@ -26,7 +26,7 @@ const Contact = () => {
           </p>
 
           <p className="font-semibold text-lg text-gray-600">
-            Careers at WeCare
+            Careers at wecare
           </p>
           <p className=" text-gray-600">
             Learn more about our teams and job opening
