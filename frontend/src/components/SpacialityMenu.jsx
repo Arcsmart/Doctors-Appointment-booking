@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { specialityData } from "../assets/data";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 const SpacialityMenu = () => {
