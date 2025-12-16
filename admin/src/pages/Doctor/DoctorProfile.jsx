@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-
 import { useContext } from "react";
-
 import { DoctorContex } from "../../context/DoctorContex";
-
 import axios from "axios";
-
 import { toast } from "react-toastify";
 
 const DoctorProfile = () => {

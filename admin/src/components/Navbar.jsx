@@ -58,10 +58,12 @@ hover:opacity-95
         >
           WeCare
         </h1>
+
         <p className="border px-2.5 py-0.5 rounded-full border-gray-600">
           {currentRole}
         </p>
       </div>
+
       <button
         onClick={handleLogout}
         className="bg-blue-600 text-white text-sm px-10 py-2 rounded-full"
