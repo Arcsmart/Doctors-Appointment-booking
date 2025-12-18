@@ -7,6 +7,7 @@ import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
 import "dotenv/config";
 import axios from "axios";
+import nodemailer from "nodemailer";
 // Api to register
 
 const registerUer = async (req, res) => {
@@ -148,6 +149,38 @@ const bookAppointment = async (req, res) => {
 
     // save new slota data in docData
     await doctorModel.findByIdAndUpdate(docId, { slots_booked });
+
+  
+    //  Configure the transporter 
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    //  Define email options
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: docData.email, 
+      subject: `New Appointment: ${userData.name}`,
+      html: `
+        <h3>Hello Dr. ${docData.name},</h3>
+        <p>You have a new appointment booking.</p>
+        <div style="border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
+            <p><strong>Patient Name:</strong> ${userData.name}</p>
+            <p><strong>Date:</strong> ${slotDate}</p>
+            <p><strong>Time:</strong> ${slotTime}</p>
+            <p><strong>Contact:</strong> ${userData.phone || "Not provided"}</p>
+        </div>
+        <p>Please login to your dashboard to view full details.</p>
+      `,
+    };
+
+    //  Send the email (we use await to ensure it sends, 
+    await transporter.sendMail(mailOptions);
+
     res.json({ sucess: true, message: "Appointment Booked" });
   } catch (error) {
     console.log(error);
