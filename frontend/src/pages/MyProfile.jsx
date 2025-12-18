@@ -10,41 +10,42 @@ const MyProfile = () => {
   const { userData, setUserData, backendUrl, token, loadUserProfileData } =
     useContext(AppContext);
 
-  const [isEdit, setIsEdit] = useState(false); 
-const [image,setImage] = useState(false)
+  const [isEdit, setIsEdit] = useState(false);
+  const [image, setImage] = useState(false);
 
-  const updateUserProfileData = async ()=>{
-     try {
-      const formData = new FormData()
-      formData.append('name',userData.name)
+  const updateUserProfileData = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("name", userData.name);
       formData.append("phone", userData.phone);
-      formData.append("address",JSON.stringify(userData.address));
+      formData.append("address", JSON.stringify(userData.address));
       formData.append("gender", userData.gender);
       formData.append("dob", userData.dob);
 
-      image && formData.append('image',image)
+      image && formData.append("image", image);
 
-      const {data} = await axios.post(backendUrl + '/api/user/update-profile',formData,{headers:{token}})
-      if(data.sucess) {
-       toast.success(data.message)
-       await loadUserProfileData() 
-       setIsEdit(false)
-       setImage(false)
-      }else{
-        toast.error(data.message)
-      }   
-
-     } catch (error) {
-      console.error(error)
+      const { data } = await axios.post(
+        backendUrl + "/api/user/update-profile",
+        formData,
+        { headers: { token } }
+      );
+      if (data.sucess) {
+        toast.success(data.message);
+        await loadUserProfileData();
+        setIsEdit(false);
+        setImage(false);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error(error);
       toast.error(error.message);
-     }
-  }
+    }
+  }; // A reusable style for input fields
 
-  // A reusable style for input fields
   const inputStyle =
     "w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500";
 
-  
   const textStyle = "text-gray-800";
 
   return (
@@ -61,12 +62,14 @@ const [image,setImage] = useState(false)
                     src={image ? URL.createObjectURL(image) : userData.image}
                     alt=""
                   />
+
                   <img
                     className="w-10 absolute bottom-12 right-12"
                     src={image ? "" : upload_area_image}
                     alt=""
                   />
                 </div>
+
                 <input
                   onChange={(e) => setImage(e.target.files[0])}
                   type="file"
@@ -97,22 +100,23 @@ const [image,setImage] = useState(false)
               </p>
             )}
           </div>
-
           <hr className="border-t border-gray-200" />
-
           {/* --- Contact Information Section --- */}
           <div className="space-y-4">
             <p className="text-sm font-bold uppercase text-gray-500 tracking-wider">
               Contact Information
             </p>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
               <div>
                 <p className="font-semibold text-gray-600">Email:</p>
                 {/* Email is not editable in this example */}
                 <p className={textStyle}>{userData.email}</p>
               </div>
+
               <div>
                 <p className="font-semibold text-gray-600">Phone:</p>
+
                 {isEdit ? (
                   <input
                     type="text"
@@ -129,8 +133,10 @@ const [image,setImage] = useState(false)
                   <p className={textStyle}>{userData.phone}</p>
                 )}
               </div>
+
               <div className="md:col-span-2">
                 <p className="font-semibold text-gray-600">Address:</p>
+
                 {isEdit ? (
                   <div className="space-y-2">
                     <input
@@ -145,6 +151,7 @@ const [image,setImage] = useState(false)
                       className={inputStyle}
                       placeholder="Address Line 1"
                     />
+
                     <input
                       onChange={(e) =>
                         setUserData((prev) => ({
@@ -160,21 +167,23 @@ const [image,setImage] = useState(false)
                   </div>
                 ) : (
                   <p className={textStyle}>
-                    {userData.address?.line1}, <br /> {userData.address?.line2}
+                    {userData.address?.line1}, <br />
+                    {userData.address?.line2}
                   </p>
                 )}
               </div>
             </div>
           </div>
-
           {/* --- Basic Information Section --- */}
           <div className="space-y-4">
             <p className="text-sm font-bold uppercase text-gray-500 tracking-wider">
               Basic Information
             </p>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
               <div>
                 <p className="font-semibold text-gray-600">Gender:</p>
+
                 {isEdit ? (
                   <select
                     onChange={(e) =>
@@ -193,8 +202,10 @@ const [image,setImage] = useState(false)
                   <p className={textStyle}>{userData.gender}</p>
                 )}
               </div>
+
               <div>
                 <p className="font-semibold text-gray-600">Birthday:</p>
+
                 {isEdit ? (
                   <input
                     onChange={(e) =>
@@ -210,7 +221,6 @@ const [image,setImage] = useState(false)
               </div>
             </div>
           </div>
-
           {/* --- Action Buttons --- */}
           <div className="flex justify-end pt-4">
             {isEdit ? (
