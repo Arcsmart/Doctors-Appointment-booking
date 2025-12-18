@@ -1,5 +1,5 @@
-import React from 'react'
-import about_image from '../assets/about_image.png'
+import React from "react";
+import about_image from "../assets/about_image.png";
 const About = () => {
   return (
     <div>
@@ -15,6 +15,7 @@ const About = () => {
           src={about_image}
           alt="about_image"
         />
+
         <div className="flex flex-col justify-center gap-6 md:w-2/4 text-sm text-gray-600">
           <p>
             We believe finding and booking a doctor's appointment should be
@@ -23,6 +24,7 @@ const About = () => {
             of trusted healthcare professionals, putting you in control of your
             health.
           </p>
+
           <p>
             Our easy-to-use platform allows you to find the right doctor for
             your needs. You can browse provider profiles, compare patient
@@ -39,9 +41,10 @@ const About = () => {
           </p>
         </div>
       </div>
+
       <div className="text-xl my-4">
         <p className="text-gray-700 font-semibold">
-          WHY <span className='text-center'></span>CHOOSE US
+          WHY <span className="text-center"></span>CHOOSE US
         </p>
       </div>
 
@@ -53,12 +56,14 @@ const About = () => {
             lifestyle
           </p>
         </div>
+
         <div className="border px-10 md:px-16 py-8 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer">
           <b>Convenience</b>
           <p>
             Access to a network of trusted healthcare professionals in your area
           </p>
         </div>
+
         <div className="border px-10 md:px-16 py-8 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer">
           <b>Personalization</b>
           <p>
@@ -69,6 +74,6 @@ const About = () => {
       </div>
     </div>
   );
-}
+};
 
-export default About
+export default About;
