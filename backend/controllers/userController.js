@@ -163,18 +163,73 @@ const bookAppointment = async (req, res) => {
     //  Define email options
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: docData.email, 
-      subject: `New Appointment: ${userData.name}`,
+      to: docData.email,
+      subject: `📅 New Appointment: ${userData.name} - WeCare`,
       html: `
-        <h3>Hello Dr. ${docData.name},</h3>
-        <p>You have a new appointment booking.</p>
-        <div style="border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
-            <p><strong>Patient Name:</strong> ${userData.name}</p>
-            <p><strong>Date:</strong> ${slotDate}</p>
-            <p><strong>Time:</strong> ${slotTime}</p>
-            <p><strong>Contact:</strong> ${userData.phone || "Not provided"}</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+          
+          <div style="background-color: #4F46E5; padding: 25px; text-align: center; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+            <h1 style="margin: 0; font-size: 24px; font-weight: bold;">WeCare Medical</h1>
+            <p style="margin: 5px 0 0; font-size: 14px; opacity: 0.9;">Your Partner in Health Management</p>
+          </div>
+
+          <div style="padding: 30px; border: 1px solid #e5e7eb; background-color: #ffffff;">
+            
+            <h2 style="color: #4F46E5; margin-top: 0;">New Appointment Confirmed</h2>
+            <p style="font-size: 16px; line-height: 1.5;">Hello <strong> ${
+              docData.name
+            }</strong>,</p>
+            <p style="font-size: 16px; line-height: 1.5; color: #555;">
+              You have a new booking request via the WeCare platform. The patient has successfully reserved a slot in your schedule.
+            </p>
+            
+            <div style="background-color: #f8fafc; padding: 20px; border-left: 5px solid #4F46E5; margin: 25px 0; border-radius: 4px;">
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #4b5563; width: 100px;">Patient:</td>
+                  <td style="padding: 8px 0; color: #111827;">${
+                    userData.name
+                  }</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #4b5563;">Date:</td>
+                  <td style="padding: 8px 0; color: #111827;">${slotDate}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #4b5563;">Time:</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: bold;">${slotTime}</td>
+                </tr>
+                 <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #4b5563;">Phone:</td>
+                  <td style="padding: 8px 0; color: #111827;">${
+                    userData.phone || "Not provided"
+                  }</td>
+                </tr>
+              </table>
+            </div>
+
+            <p style="margin-bottom: 30px;">Please log in to your dashboard to view the full medical history or manage this appointment.</p>
+
+            <div style="text-align: center; margin-bottom: 40px;">
+              <a href="https://wecareadmin-eight.vercel.app/" style="background-color: #4F46E5; color: white; padding: 14px 30px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">Go to Doctor Dashboard</a>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;" />
+
+            <div style="background-color: #eff6ff; padding: 20px; border-radius: 8px;">
+              <h3 style="margin-top: 0; color: #1e40af; font-size: 16px;">About WeCare</h3>
+              <p style="font-size: 13px; color: #4b5563; line-height: 1.6; margin-bottom: 0;">
+                WeCare is Ethiopia's leading digital healthcare solution, dedicated to simplifying the connection between medical professionals and patients. Our platform ensures efficient scheduling, secure data management, and seamless communication, allowing you to focus on what matters most—providing exceptional care.
+              </p>
+            </div>
+
+          </div>
+
+          <div style="text-align: center; padding: 20px; font-size: 12px; color: #9ca3af; background-color: #f9fafb; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+            <p style="margin: 5px 0;">&copy; ${new Date().getFullYear()} WeCare. All rights reserved.</p>
+            <p style="margin: 5px 0;">This is an automated message, please do not reply directly to this email.</p>
+          </div>
         </div>
-        <p>Please login to your dashboard to view full details.</p>
       `,
     };
 
