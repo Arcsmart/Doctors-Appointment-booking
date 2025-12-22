@@ -1,45 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import logo from "../assets/wecare.png";
 import upload_area from "../assets/upload_area.svg";
 import menu from "../assets/menu.png";
 import close from "../assets/close.png";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [showMenu, setShowMenu] = useState(false); 
-  const {token,setToken,userData} = useContext(AppContext)
-  const logout = ()=>{ 
-    setToken(false)
-    localStorage.removeItem('token')
-  }
-  
+  const [showMenu, setShowMenu] = useState(false);
+  const { token, setToken, userData } = useContext(AppContext);
+
+  const logout = () => {
+    setToken(false);
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
+  // 1. Helper Function: Ensures menu closes when any link/button is clicked
+  const handleNavigate = (path) => {
+    navigate(path);
+    setShowMenu(false);
+  };
 
   return (
-    <div className="flex items-center justify-between text-sm py-2 mb-5 border-b border-b-gray-400 sticky top-0 z-30 backdrop-blur-lg ">
-      {/* <img className="w-7 h-5" src={logo} alt="" /> */}
+    // 2. Fixed Sticky Header: Added bg-white/80 so backdrop-blur works
+    <div className="sticky top-0 z-50 flex items-center justify-between text-sm py-2 mb-5 border-b border-b-gray-400 bg-white/80 backdrop-blur-lg">
       <h1
-        onClick={() => {
-          navigate("/");
-        }}
-        className="
-text-3xl md:text-4xl lg:text-5xl font-black italic
-cursor-pointer
-tracking-tighter
-bg-gradient-to-r
-from-pink-500
-via-purple-500
-to-blue-500
-text-transparent
-bg-clip-text
-transition
-duration-300
-ease-in-out
-hover:scale-[1.02]
-hover:opacity-95
-"
+        onClick={() => handleNavigate("/")}
+        className="text-3xl md:text-4xl font-black italic cursor-pointer tracking-tighter bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-transparent bg-clip-text ml-4 md:ml-10"
       >
         WeCare
       </h1>
@@ -48,91 +37,86 @@ hover:opacity-95
       <ul className="hidden md:flex items-start gap-5 font-medium">
         <NavLink to="/">
           <li className="py-1">Home</li>
-          <hr className="border-none outline-none h-0.5 bg-blue-500 w-3/5 m-auto hidden" />
         </NavLink>
         <NavLink to="/doctors">
           <li className="py-1">Doctors</li>
-          <hr className="border-none outline-none h-0.5 bg-blue-500 w-3/5 m-auto hidden" />
         </NavLink>
         <NavLink to="/about">
           <li className="py-1">About</li>
-          <hr className="border-none outline-none h-0.5 bg-blue-500 w-3/5 m-auto hidden" />
         </NavLink>
         <NavLink to="/contact">
           <li className="py-1">Contact</li>
-          <hr className="border-none outline-none h-0.5 bg-blue-500 w-3/5 m-auto hidden" />
         </NavLink>
-        <NavLink to="https://wecareadmin-eight.vercel.app">
-          <li className="py-2 rounded-full text-sm border-gray-500">
-            Admin pannel
-          </li>
-          {/* <hr className="border-none outline-none h-0.5 bg-blue-500 w-3/5 m-auto hidden" /> */}
-        </NavLink>
+        <a
+          href="https://wecareadmin-eight.vercel.app"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <li className="py-1">Admin Panel</li>
+        </a>
       </ul>
 
-      {/* Profile/Login and Menu Icon Section */}
-      <div
-        className={`flex items-center g-4 ${showMenu ? "hidden md:flex" : ""}`}
-      >
-        {/* Profile/Login Section */}
-        <div>
-          {token && userData ? (
-            <div className="flex items-center gap-2 cursor-pointer group relative">
-              <img
-                className="w-8 rounded-full"
-                src={userData.image || upload_area}
-                alt=""
-              />
-              {/* <img className="w-4.5" src={""} alt="" /> */}
-              <div className="absolute top-0 right-0 pt-14 text-base font-medium text-grey-600 z-20 hidden group-hover:block">
-                <div className="min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4">
-                  <p
-                    onClick={() => navigate("/myprofile")}
-                    className="hover:text-black cursor-pointer"
-                  >
-                    Profile
-                  </p>
-                  <p
-                    onClick={() => navigate("/myappointments")}
-                    className="hover:text-black cursor-pointer"
-                  >
-                    My Appointment
-                  </p>
-                  <p
-                    onClick={logout}
-                    className="hover:text-black cursor-pointer"
-                  >
-                    Logout
-                  </p>
-                </div>
+      {/* Profile/Login and Mobile Menu Icon */}
+      <div className="flex items-center gap-4 mr-4 md:mr-10">
+        {token && userData ? (
+          <div className="flex items-center gap-2 cursor-pointer group relative">
+            <img
+              className="w-8 rounded-full"
+              src={userData.image || upload_area}
+              alt=""
+            />
+            <div className="absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block">
+              <div className="min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4 shadow-lg">
+                <p
+                  onClick={() => handleNavigate("/myprofile")}
+                  className="hover:text-black cursor-pointer"
+                >
+                  Profile
+                </p>
+                <p
+                  onClick={() => handleNavigate("/myappointments")}
+                  className="hover:text-black cursor-pointer"
+                >
+                  My Appointment
+                </p>
+                <p onClick={logout} className="hover:text-black cursor-pointer">
+                  Logout
+                </p>
               </div>
             </div>
-          ) : (
-            <button
-              onClick={() => navigate("/login")}
-              className="bg-blue-500 text-white px-8 py-3 rounded-full font-light md:block"
-            >
-              Create Account
-            </button>
-          )}
-        </div>
+          </div>
+        ) : (
+          // DESKTOP "Create Account" Button
+          <button
+            onClick={() => handleNavigate("/login")}
+            className="hidden md:block bg-blue-500 text-white px-8 py-3 rounded-full font-light"
+          >
+            Create Account
+          </button>
+        )}
 
-        {/* Mobile Menu Icon (Only visible when menu is CLOSED on mobile) */}
+        {/* Mobile Menu Icon */}
         <img
           onClick={() => setShowMenu(true)}
-          className={`w-6 md:hidden ${showMenu ? "hidden" : "block"}`}
+          className="w-6 md:hidden cursor-pointer"
           src={menu}
-          alt=""
+          alt="Open Menu"
         />
       </div>
 
-      {/* ----Mobile Menu */}
+      {/* ---- Mobile Menu Overlay ---- */}
       <div
-        className={` ${
-          showMenu ? "fixed w-full h-full" : "h-0 w-0"
-        } md:hidden right-0 top-0 bottom-0 z-40 sticky top-0 z-30  overflow-hidden bg-white transition-all`}
+        className={`fixed inset-0 z-50 bg-white transition-all duration-300 ${
+          showMenu
+            ? "translate-x-0 opacity-100"
+            : "translate-x-full opacity-0 pointer-events-none"
+        } md:hidden`}
       >
-        <div className="flex items-center justify-between px-5 py-6">
+        {/* Mobile Header: Logo Left, X Right */}
+        <div className="flex items-center justify-between px-5 py-6 border-b">
+          <h2 className="text-2xl font-black italic bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-transparent bg-clip-text">
+            WeCare
+          </h2>
           <img
             className="w-7 cursor-pointer"
             onClick={() => setShowMenu(false)}
@@ -140,35 +124,50 @@ hover:opacity-95
             alt="Close menu"
           />
         </div>
-        <ul className="flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium">
+
+        {/* Mobile Menu Links */}
+        <ul className="flex flex-col items-end gap-4 mt-5 px-8 text-lg font-medium">
           <NavLink
-            className="px-4 py-2 rounded inline-block"
             onClick={() => setShowMenu(false)}
-            to={"/"}
+            to="/"
+            className="px-4 py-2"
           >
             Home
           </NavLink>
           <NavLink
-            className="px-4 py-2 rounded inline-block"
             onClick={() => setShowMenu(false)}
-            to={"/doctors"}
+            to="/doctors"
+            className="px-4 py-2"
           >
             Doctors
           </NavLink>
           <NavLink
-            className="px-4 py-2 rounded inline-block"
             onClick={() => setShowMenu(false)}
-            to={"/about"}
+            to="/about"
+            className="px-4 py-2"
           >
             About
           </NavLink>
           <NavLink
-            className="px-4 py-2 rounded inline-block"
             onClick={() => setShowMenu(false)}
-            to={"/contact"}
+            to="/contact"
+            className="px-4 py-2"
           >
             Contact
           </NavLink>
+          <a href="https://wecareadmin-eight.vercel.app" className="px-4 py-2">
+            Admin Panel
+          </a>
+
+          {/* MOBILE "Create Account" Button (Only shows if NOT logged in) */}
+          {!token && (
+            <button
+              onClick={() => handleNavigate("/login")}
+              className="mt-4 bg-blue-500 text-white px-10 py-3 rounded-full w-full text-center"
+            >
+              Create Account
+            </button>
+          )}
         </ul>
       </div>
     </div>

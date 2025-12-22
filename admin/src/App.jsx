@@ -27,13 +27,13 @@ function App() {
         <Routes>
           <Route path="/" element={<></>} />
           {/* Admin route */}
-          <Route path="/admin-dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/all-appointment" element={<AllAppointment />} />
           <Route path="/add-doctor" element={<AddDoctor />} />
           <Route path="/doctor-list" element={<DoctorList />} />
           {/* Doctor route */}
           <Route path="/doctor-appointment" element={<DoctorAppointment />} />
-          <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+          <Route path="/" element={<DoctorDashboard />} />
           <Route path="/doctor-profile" element={<DoctorProfile />} />
         </Routes>
       </div>
