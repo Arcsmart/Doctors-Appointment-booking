@@ -50,7 +50,7 @@ const Login = () => {
     if (token) {
       navigate("/");
     }
-  }, [token]);
+  }, []);
   return (
     <form onSubmit={onSubmitHandle} className="min-h-[80vh] flex items-center">
       <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[34px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg">
