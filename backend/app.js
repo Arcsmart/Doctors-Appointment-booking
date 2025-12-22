@@ -17,6 +17,8 @@ connectCloudinary();
 const allowedOrigins = [
   "https://wecarebook.vercel.app",
   "https://wecareadmin-eight.vercel.app",
+  // "http://localhost:5173",
+  // "http://localhost:5174",
 ];
 
 app.use(
@@ -52,9 +54,9 @@ app.get("/", (req, res) => {
   res.send("Api working");
 });
 
-// app.listen(port, () => {
-//   console.log("Server starting", port);
-// });
+app.listen(port, () => {
+  console.log("Server starting", port);
+});
 
 export default app;
 
