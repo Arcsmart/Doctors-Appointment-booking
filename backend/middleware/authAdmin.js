@@ -7,7 +7,10 @@ const authAdmin = async (req,res,next)=>{
       if(!atoken){
          return res.json({sucess:false,message:'Not Token Provided'}) 
       } 
-      const token_decode=jwt.verify(atoken,process.env.JWT_SECRET)
+      const actualToken = atoken.startsWith("Bearer ")
+        ? atoken.split(" ")[1]
+        : atoken;
+      const token_decode = jwt.verify(actualToken, process.env.JWT_SECRET);
       if(token_decode !== process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD){
         return res.json({success:false,message:'Not Authorized Login Agin'})  
       }

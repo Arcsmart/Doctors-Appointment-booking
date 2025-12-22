@@ -9,13 +9,12 @@ import { AppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [showMenu, setShowMenu] = useState(false); 
-  const {token,setToken,userData} = useContext(AppContext)
-  const logout = ()=>{ 
-    setToken(false)
-    localStorage.removeItem('token')
-  }
-  
+  const [showMenu, setShowMenu] = useState(false);
+  const { token, setToken, userData } = useContext(AppContext);
+  const logout = () => {
+    setToken(false);
+    localStorage.removeItem("token");
+  };
 
   return (
     <div className="flex items-center justify-between text-sm py-2 mb-5 border-b border-b-gray-400 sticky top-0 z-30 backdrop-blur-lg ">
