@@ -23,7 +23,7 @@ const Sidebar = () => {
                 isActive ? "bg-[#F2F3FF] border-r-4 border-blue-500" : ""
               }`
             }
-            to={"/admin-dashboard"}
+            to={"/"}
           >
             <HomeIcon className="h-6 w-6 text-blue-600 hover:text-blue-800" />
             <p className="hidden md:block">Dashboard</p>
@@ -72,7 +72,7 @@ const Sidebar = () => {
                 isActive ? "bg-[#F2F3FF] border-r-4 border-blue-500" : ""
               }`
             }
-            to={"/doctor-dashboard"}
+            to={"/"}
           >
             <HomeIcon className="h-6 w-6 text-blue-600 hover:text-blue-800" />
             <p className="hidden md:block"> Doctor Dashboard</p>
